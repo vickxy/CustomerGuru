@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>JavaScript Form Validation using a sample registration form</title>
+		<script>
+			function validateForm() {
+			    var name = document.forms["myForm"]["name"].value;
+			    var email = document.forms["myForm"]["email"].value;
+			    var phone = document.forms["myForm"]["phone"].value;
+			    var e = document.getElementById("city1");
+			    var selected = e.options[e.selectedIndex].value;
+			    var bool = true;
+			    if (name == "") {
+			    	document.getElementById("name").style.color="#FF3300";
+			        bool = false;
+			    }else{
+			    	document.getElementById("name").style.color="#000000";
+			    }
+
+			    if(phone.match(/^\d{10}$/)){
+					document.getElementById("phone").style.color=" #000000";
+				}else{
+					document.getElementById("phone").style.color="#FF3300";
+					bool = false;
+				}
+
+			    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)){
+			    	document.getElementById("email").style.color="#000000";
+				}else{
+			    	document.getElementById("email").style.color="#FF3300";
+					bool = false;
+				}
+
+				if(selected == "Select"){
+					document.getElementById("city").style.color="#FF3300";
+					bool = false;
+				}else if(selected != "Select"){
+					document.getElementById("city").style.color="#000000";
+				}
+				if(bool){
+					alert("Successfull");
+				}
+				return bool;
+			}
+		</script>
+	</head>
+	<body>
+		<h1>Registration Form</h1>
+		Use tab keys to move from one input field to the next.
+		<form name="myForm" action="#" onsubmit="return validateForm()" method="post">
+			<label for="name"><div id = "name">Name: </div></label>
+			<input type="text" name="name" size="50" required/><br><br>
+
+			<label for="phone"><div id = "phone">Phone:</div></label>
+			<input type="numeric" name="phone" size="50" required /><br><br>
+
+			<label for="email"><div id = "email">Email:</div></label>
+			<input type="email" name="email" size="50" required="true" /><br><br>
+
+			<label for="city"><div id = "city">City:</div></label>
+			<select name="city" id="city1" required>
+				<option>Select</option>
+				<option value="D">Delhi</option>
+				<option value="M">Mumbai</option>
+				<option value="K">Kolkata</option>
+				<option value="C">Chennai</option>
+				<option value="B">Bangalore</option>
+			</select>
+			<br><br>
+			<input type="submit" value="Submit" onclick="validateForm()" required>
+		</form>
+	</body>
+</html>
